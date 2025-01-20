@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map ,catchError} from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://bhavani-flixmovies.netlify.app/';
@@ -27,7 +26,6 @@ export class FetchApiDataService {
   // User login endpoint
   public userLogin(userDetails: any): Observable<any> {
     return this.http.post(apiUrl + 'login', userDetails).pipe(
-      map(this.extractResponseData),
       catchError(this.handleError)
     );
   }
@@ -46,7 +44,7 @@ export class FetchApiDataService {
 
   // Get one movie
   public getMovie(title: string): Observable<any> {
-    const token = this.getStoredToken();
+    const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/' + title, {
       headers: new HttpHeaders(
         {
@@ -60,7 +58,7 @@ export class FetchApiDataService {
 
   // Get director
   public getDirector(name: string) {
-    const token = this.getStoredToken();
+    const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/director/' + name, {
       headers: new HttpHeaders(
         {
@@ -74,7 +72,7 @@ export class FetchApiDataService {
 
   // Get genre
   public getGenre(name: string) {
-    const token = this.getStoredToken();
+    const token = localStorage.getItem('token');
     return this.http.get(apiUrl + 'movies/genre/' + name, {
       headers: new HttpHeaders(
         {
@@ -112,10 +110,9 @@ export class FetchApiDataService {
   }
   // Add a movie to favourite Movies
   public addUserFavoriteMovie(movieId: string) {
-    const token = this.getStoredToken();
-    let user = this.getStoredUser();
-
-    return this.http.put(apiUrl + 'users/' + user.userName + '/favorite/' + movieId, {}, {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    return this.http.put(apiUrl + 'users/' + username + '/favorites/' + movieId, {}, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
@@ -128,10 +125,10 @@ export class FetchApiDataService {
 
   // Delete a movie from favourite Movies
   public deleteUserFavoriteMovie(movieId: string) {
-    const token = this.getStoredToken();
-    let user = this.getStoredUser();
-
-    return this.http.delete(apiUrl + 'users/' + user.userName + '/favorite/' + movieId, {
+    const token = localStorage.getItem('token');
+  
+    const username = localStorage.getItem('username');
+    return this.http.delete(apiUrl + 'users/' + username + '/favorites/' + movieId, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
@@ -144,10 +141,11 @@ export class FetchApiDataService {
 
   // Edit user
   public editUser(userDetails: any): Observable<any> {
-    const token = this.getStoredToken();
-    let user = this.getStoredUser();
+    const token = localStorage.getItem('token');
+    
 
-    return this.http.put(apiUrl + 'users/' + user.userName, userDetails, {
+    const username = localStorage.getItem('username');
+    return this.http.put(apiUrl + 'users/' + username, userDetails, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
@@ -160,9 +158,10 @@ export class FetchApiDataService {
 
   // Delete user
   public deleteUser(userDetails: any): Observable<any> {
-    const token = this.getStoredToken();
-    let user = this.getStoredUser();
-    return this.http.delete(apiUrl + 'users/' + user.username, {
+    const token = localStorage.getItem('token');
+    
+    const username = localStorage.getItem('username');
+    return this.http.delete(apiUrl + 'users/' + username, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
@@ -174,7 +173,7 @@ export class FetchApiDataService {
   }
 
 // Non-typed response extraction
-  private extractResponseData(res: Response): any {
+  private extractResponseData(res: any): any {
     const body = res;
     return body || { };
   }
