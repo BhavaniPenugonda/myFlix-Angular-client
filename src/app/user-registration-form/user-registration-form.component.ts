@@ -10,13 +10,17 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
+import { MatCardModule } from '@angular/material/card';
 
+import { MatFormFieldModule } from '@angular/material/form-field'; 
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-user-registration-form',
   standalone:true,
-  imports: [MatSnackBar,MatDialogRef,FormsModule],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule],
   templateUrl: './user-registration-form.component.html',
   styleUrl: './user-registration-form.component.scss'
 })
