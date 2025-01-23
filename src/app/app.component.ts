@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
+  standalone:true,
   imports: [RouterOutlet,MatDialog],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
