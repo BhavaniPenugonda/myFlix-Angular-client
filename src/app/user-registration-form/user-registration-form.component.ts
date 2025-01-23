@@ -9,12 +9,14 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 // This import is used to display notifications back to the user
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+import { FormsModule } from '@angular/forms';
+
 
 
 @Component({
   selector: 'app-user-registration-form',
   standalone:true,
-  imports: [MatSnackBar,MatDialogRef],
+  imports: [MatSnackBar,MatDialogRef,FormsModule],
   templateUrl: './user-registration-form.component.html',
   styleUrl: './user-registration-form.component.scss'
 })
