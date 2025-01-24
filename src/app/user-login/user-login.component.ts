@@ -12,11 +12,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 @Component({
     selector: 'app-user-login-form',
     standalone:true,
-    imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule],
+    imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
     templateUrl: './user-login-form.component.html',
     styleUrl: './user-login-form.component.scss'
 })
