@@ -44,10 +44,11 @@ export class UserRegistrationFormComponent implements
   registerUser(): void {
       this.fetchApiData.userRegistration(this.userData).subscribe({
         next: (result) => {
-          this.dialogRef.close();
+          
           this.snackBar.open("Registration success",  "OK", {
               duration: 2000
           });
+          this.dialogRef.close();
       },
       error: (err) => {
           this.snackBar.open("Registration failed", "OK", {

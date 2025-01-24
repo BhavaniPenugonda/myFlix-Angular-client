@@ -36,15 +36,15 @@ export class UserLoginFormComponent implements OnInit {
     logInUser() : void {
         this.fetchApiData.userLogin(this.userData).subscribe({
             next: (result) => {
+                // Store the current user and token in localStorage
+               localStorage.setItem('currentUser', JSON.stringify(result.user)); // Store user details
+               localStorage.setItem('token', result.token); // Store JWT token
+
+                this.snackBar.open("Login success",  "OK", {duration: 2000 });
                 this.dialogRef.close();
-                this.snackBar.open("Login success",  "OK", {
-                    duration: 2000
-                });
             },
             error: (err) => {
-                this.snackBar.open("Login fail", "OK", {
-                    duration: 2000
-                });
+                this.snackBar.open("Login fail", "OK", {duration: 2000 });
             }
         });
     }
