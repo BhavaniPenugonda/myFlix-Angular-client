@@ -31,16 +31,18 @@ export class UserLoginFormComponent implements OnInit {
     ngOnInit(): void {}
 
     logInUser() : void {
-        this.fetchApiData.userLogin(this.userData).subscribe(res => {
-            this.dialogRef.close();
-            this.snackBar.open("Login success",  "OK", {
-                duration: 2000
-            });
-            
-        }, res => {
-            this.snackBar.open("Login fail", "OK", {
-                duration: 2000
-            })
-        })
+        this.fetchApiData.userLogin(this.userData).subscribe({
+            next: (result) => {
+                this.dialogRef.close();
+                this.snackBar.open("Login success",  "OK", {
+                    duration: 2000
+                });
+            },
+            error: (err) => {
+                this.snackBar.open("Login fail", "OK", {
+                    duration: 2000
+                });
+            }
+        });
     }
 }
