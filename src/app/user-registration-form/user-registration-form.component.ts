@@ -25,7 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   standalone:true,
   imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
   templateUrl: './user-registration-form.component.html',
-  styleUrl: './user-registration-form.component.scss'
+  styleUrls: ['./user-registration-form.component.scss']
 })
 
 export class UserRegistrationFormComponent implements

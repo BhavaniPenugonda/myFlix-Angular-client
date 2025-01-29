@@ -21,7 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     standalone:true,
     imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
     templateUrl: './user-login.component.html',
-    styleUrl: './user-login.component.scss'
+    styleUrls: ['./user-login.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
     @Input() userData = { username: "", password: "" };
