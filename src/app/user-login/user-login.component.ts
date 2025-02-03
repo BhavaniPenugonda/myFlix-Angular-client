@@ -24,7 +24,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     styleUrls: ['./user-login.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
-    @Input() userData = { username: "", password: "" };
+    @Input() userData = { Username: "", Password: "" };
 
     constructor(
         public fetchApiData: FetchApiDataService,
@@ -37,7 +37,7 @@ export class UserLoginFormComponent implements OnInit {
         this.fetchApiData.userLogin(this.userData).subscribe({
             next: (result) => {
                 // Store the current user and token in localStorage
-               localStorage.setItem('currentUser', JSON.stringify(result.user.username)); // Store user details
+               localStorage.setItem('currentUser', JSON.stringify(result.user.Username)); // Store user details
                localStorage.setItem('token', result.token); // Store JWT token
 
                 this.snackBar.open("Login success",  "OK", {duration: 2000 });
