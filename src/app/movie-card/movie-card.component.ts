@@ -1,10 +1,20 @@
 import { Component,OnInit } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service'
+import { MatButtonModule } from '@angular/material/button';
+
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-movie-card',
   standalone:true,
-  imports: [],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatInputModule,MatDialogModule],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
