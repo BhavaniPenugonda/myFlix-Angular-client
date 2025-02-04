@@ -3,10 +3,14 @@ import { UserLoginFormComponent } from '../user-login/user-login.component';
 import { UserRegistrationFormComponent } from '../user-registration-form/user-registration-form.component';
 import { MatDialog } from '@angular/material/dialog';
 
+import { MatDialogModule } from '@angular/material/dialog';
+
+
 
 @Component({
   selector: 'app-welcome-page',
-  imports: [],
+  standalone:true,
+  imports: [MatDialogModule],
   templateUrl: './welcome-page.component.html',
   styleUrls: ['./welcome-page.component.scss']
 })
