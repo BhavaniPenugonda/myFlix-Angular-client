@@ -18,7 +18,7 @@ const appRoutes: Routes = [
 @Component({
   selector: 'app-root',
 
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
