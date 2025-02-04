@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 
 
@@ -29,7 +30,8 @@ export class UserLoginFormComponent implements OnInit {
     constructor(
         public fetchApiData: FetchApiDataService,
         public dialogRef: MatDialogRef<UserLoginFormComponent>,
-        public snackBar: MatSnackBar) { }
+        public snackBar: MatSnackBar,
+        public router: Router) { }
     
     ngOnInit(): void {}
 
@@ -39,10 +41,13 @@ export class UserLoginFormComponent implements OnInit {
                 // Store the current user and token in localStorage
                localStorage.setItem('currentUser', JSON.stringify(result.user.Username)); // Store user details
                localStorage.setItem('token', result.token); // Store JWT token
+               this.dialogRef.close();
+               this.snackBar.open("Login success",  "OK", {duration: 2000 });
+               this.router.navigate(['movies']);
+                
 
-                this.snackBar.open("Login success",  "OK", {duration: 2000 });
-                this.dialogRef.close();
             },
+            
             error: (err) => {
                 this.snackBar.open("Login fail", "OK", {duration: 2000 });
             }
