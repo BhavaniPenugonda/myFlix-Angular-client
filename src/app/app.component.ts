@@ -17,8 +17,8 @@ const appRoutes: Routes = [
 
 @Component({
   selector: 'app-root',
-
-  imports: [RouterModule],
+  standalone:true,
+  imports: [RouterModule,WelcomePageComponent,MovieCardComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
