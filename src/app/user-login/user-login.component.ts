@@ -14,13 +14,14 @@ import { MatInputModule } from '@angular/material/input';
 
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
 @Component({
     selector: 'app-user-login',
     standalone:true,
-    imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
+    imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule,HttpClientModule],
     templateUrl: './user-login.component.html',
     styleUrls: ['./user-login.component.scss']
 })

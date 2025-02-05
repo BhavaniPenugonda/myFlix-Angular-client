@@ -17,13 +17,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field'; 
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { HttpClientModule } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-user-registration-form',
   standalone:true,
-  imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule,HttpClientModule],
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss']
 })
