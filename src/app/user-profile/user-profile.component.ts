@@ -14,10 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user-profile',
   standalone: true,
-  imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule,CommonModule],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
 })

@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-
+import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,11 +19,10 @@ import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';  
 @Component({
   selector: 'app-movie-card',
   standalone:true,
-  imports: [MatButtonModule,MatCardModule,FormsModule,MatInputModule,MatDialogModule,MatIconModule],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatInputModule,MatDialogModule,MatIconModule,CommonModule],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-
 export class MovieCardComponent {
   movies: any[] = [];
 
