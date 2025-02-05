@@ -9,12 +9,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @Component({
   selector: 'app-movie-card',
   standalone:true,
-  imports: [MatButtonModule,MatCardModule,FormsModule,MatInputModule,MatDialogModule],
+  imports: [MatButtonModule,MatCardModule,FormsModule,MatInputModule,MatDialogModule,MatIconModule],
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
