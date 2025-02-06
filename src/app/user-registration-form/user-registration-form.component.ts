@@ -25,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
   standalone:true,
   imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule,HttpClientModule],
   templateUrl: './user-registration-form.component.html',
-  styleUrls: ['./user-registration-form.component.scss']
+  styleUrls: ['./user-registration-form.component.scss'],
+
 })
 
 export class UserRegistrationFormComponent implements
