@@ -180,8 +180,8 @@ export class FetchApiDataService {
    */
   public addUserFavoriteMovie(movieId: string) {
     const token = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
-    return this.http.put(apiUrl + 'users/' + username + '/favorites/' + movieId, {}, {
+    const username = JSON.parse(localStorage.getItem('currentUser')||'{}');
+    return this.http.post(apiUrl + 'users/' + username + '/movies/' + movieId, {}, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,
