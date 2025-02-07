@@ -1,5 +1,8 @@
-<h1 mat-dialog-title>Genre: {{ data.genre }}</h1>
-<div mat-dialog-content>
-  <p>More details about the genre: {{ data.genre }}</p>
-  <!-- You can add more content or make the dialog dynamic as needed -->
-</div>
+
+<h1 mat-dialog-title>Genre</h1>
+<mat-dialog-content>
+  <p>The genre of this movie is: <strong>{{ data.genre }}</strong></p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
