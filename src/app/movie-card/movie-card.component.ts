@@ -14,6 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-details-dialog.component';  // Import dialog component
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';  // Import dialog component
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';  // Import dialog component
+import { Router } from '@angular/router';  // Import Router to navigate
 /** 
 * Component for displaying movie cards.
  * Allows users to view movie details, open dialogs for genre and director,
@@ -34,8 +35,9 @@ export class MovieCardComponent {
   * @param {FetchApiDataService} fetchApiData - Service to fetch movie data and handle API requests.
   * @param {MatDialog} dialog - Dialog service to open dialogs.
   * @param {MatSnackBar} snackBar - SnackBar service to show user feedback.
+  * 
   */
-  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, private snackBar: MatSnackBar) { }
+  constructor(public fetchApiData: FetchApiDataService, public dialog: MatDialog, private snackBar: MatSnackBar,private router: Router, ) { }
   /**
    * Lifecycle hook that is called after the component has been initialized.
    * Fetches the list of movies when the component is initialized.
@@ -96,11 +98,8 @@ getMovies(): void {
     const movie = this.movies.find(m => m.Title === title);
     if (movie) {
       this.dialog.open(MovieDetailsDialogComponent, {
-       // data: { movie: movie }
-        data: {
-          title: movie.title,
-          content: movie.description
-      },
+       data: { movie: movie }
+        
       });
     }
   }
@@ -116,5 +115,10 @@ getMovies(): void {
     this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
       this.snackBar.open('Movie added to favorites!', 'OK', { duration: 3000 });
     });
+  }
+
+  // Navigate to user profile page
+  goToProfile(): void {
+    this.router.navigate(['/profile']);  // Navigate to the profile page
   }
 }
