@@ -65,9 +65,10 @@ getMovies(): void {
    * @returns {void}
    */
   openGenreDialog(genre: any): void {
-    
+    let genreName: string;
+    genreName = genre.Name;
     this.dialog.open(GenreDialogComponent, {
-      data: { genre: genre }
+      data: { genre: genreName }
     });
   }
 
@@ -95,7 +96,11 @@ getMovies(): void {
     const movie = this.movies.find(m => m.Title === title);
     if (movie) {
       this.dialog.open(MovieDetailsDialogComponent, {
-        data: { movie: movie }
+       // data: { movie: movie }
+        data: {
+          title: movie.title,
+          content: movie.description
+      },
       });
     }
   }

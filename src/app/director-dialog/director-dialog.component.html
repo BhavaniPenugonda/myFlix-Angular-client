@@ -1,10 +1,11 @@
 
-<h1 mat-dialog-title>Director: {{ data.director.Name }}</h1>
-<div mat-dialog-content>
-  <p>More about director {{ data.director.Name }}:</p>
-
-  <!-- Add more details as needed, e.g., films, biography, etc. -->
-</div>
+<h2 mat-dialog-title>Director Information</h2>
+<mat-dialog-content>
+  <p><strong>Name:</strong> {{ data.director.Name }}</p>
+  <p><strong>Biography:</strong> {{ data.director.Bio }}</p>
+  <p><strong>Birth:</strong> {{ data.director.Birth }}</p>
+  <p><strong>Death:</strong> {{ data.director.Death ? data.director.Death : 'N/A' }}</p>
+</mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>
 </mat-dialog-actions>
