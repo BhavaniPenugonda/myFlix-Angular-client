@@ -15,6 +15,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { CommonModule } from '@angular/common';
+
+/**
+ * UserProfileComponent allows users to view and edit their profile information,
+ * including username, email, and birthday. It also enables users to manage their 
+ * favourite movies.
+ */
 @Component({
   selector: 'app-user-profile',
   standalone: true,
@@ -23,28 +29,54 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  /**
+   * Holds the user profile data returned from the backend.
+   */
   user: any = {};  // To hold the user data
+  /**
+   * Stores the original user data for comparison during editing.
+   */
   userData: any = {}; // To store the original user data
+  /**
+   * Holds the user's favourite movies.
+   */
   favouriteMovies: any[] = []; // To store the user's favourite movies
 
   // Bind form fields
+  /**
+   * Form fields for updating user profile information.
+   * These fields are bound to the form inputs in the component's template.
+   */
   userDetails = {
     Username: '',
     Email: '',
     Birthday: ''
   };
-
+/**
+   * Creates an instance of UserProfileComponent.
+   * @param fetchApiData The service used to fetch and edit user data.
+   * @param snackBar The service used to show notification messages.
+   * @param router The Angular Router service to navigate between views.
+   */
   constructor(
     private fetchApiData: FetchApiDataService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
-
+/**
+   * Lifecycle hook called when the component is initialized. 
+   * It fetches the user's profile data when the component loads.
+   */
   ngOnInit(): void {
     this.getUserProfile();  // Fetch the user profile when the component is initialized
   }
 
   // Fetch the user's profile data from the backend
+  /**
+   * Fetches the user's profile data from the backend.
+   * This function updates the `user`, `userData`, and `userDetails` properties
+   * with the fetched data.
+   */
   getUserProfile(): void {
     const username = localStorage.getItem('currentUser');
     this.fetchApiData.getUser().subscribe({
@@ -64,6 +96,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Save the edited profile to the backend
+  /**
+   * Saves the edited profile information to the backend.
+   * This function sends the updated user data and updates the profile upon success.
+   * Displays success or error messages accordingly.
+   */
   editUserProfile(): void {
     this.fetchApiData.editUser(this.userDetails).subscribe({
       next: (result) => {
@@ -77,6 +114,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Fetch the user's favourite movies from the backend
+  /**
+   * Fetches the user's favourite movies from the backend.
+   * Displays a message if the user is not logged in.
+   */
   getUserFavouriteMovies(): void {
     const userId = localStorage.getItem('currentUser'); // Assuming userId is stored in localStorage
     // Check if userId is null
@@ -95,6 +136,10 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Remove movie from favourite list
+  /**
+   * Removes a movie from the user's favourite list.
+   * @param movieId The ID of the movie to be removed from favourites.
+   */
   removeFromFavourites(movieId: string): void {
     const userId = localStorage.getItem('currentUser');
     this.fetchApiData.deleteUserFavoriteMovie(movieId).subscribe({
@@ -109,11 +154,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Cancel editing and reset to original profile
+  /**
+   * Cancels the editing process and restores the original user data.
+   */
   cancelEdit(): void {
     this.userDetails = { ...this.userData };
   }
 
-  // Optionally, navigate to another page (e.g., "movies") if needed
+  
+  /**
+   * Navigates the user to the movies page.
+   */
   goToMovies(): void {
     this.router.navigate(['/movies']);
   }

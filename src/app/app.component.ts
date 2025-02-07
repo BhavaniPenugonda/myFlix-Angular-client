@@ -11,7 +11,11 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
 
 
 
-
+/**
+ * The root component for the Angular application.
+ * This component serves as the entry point for the app.
+ * It includes the routing module and initializes routing functionality.
+ */
 
 
 
@@ -23,6 +27,10 @@ import { MovieCardComponent } from './movie-card/movie-card.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  /**
+   * The title of the app. It can be displayed in the header or used dynamically in the template.
+   * @type {string}
+   */
   title = 'myFlix-Angular-client';
 
  

@@ -16,7 +16,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 
-
+/**
+ * The UserLoginFormComponent is used to handle user login functionality.
+ * It allows users to enter their username and password, authenticate them,
+ * and navigate to the movies page upon successful login.
+ */
 
 @Component({
     selector: 'app-user-login',
@@ -27,16 +31,37 @@ import { HttpClientModule } from '@angular/common/http';
     
 })
 export class UserLoginFormComponent implements OnInit {
+    /**
+     * The user data input object that holds the values from the login form.
+     * 
+     * @example { Username: "", Password: "" }
+     */
     @Input() userData = { Username: "", Password: "" };
-
+/**
+     * Creates an instance of UserLoginFormComponent.
+     * @param fetchApiData The service responsible for making API calls related to user login.
+     * @param dialogRef The reference to the MatDialog for closing the dialog after login.
+     * @param snackBar The MatSnackBar service used to display notifications to the user.
+     * @param router The Router service used to navigate to different routes in the application.
+     */
     constructor(
         public fetchApiData: FetchApiDataService,
         public dialogRef: MatDialogRef<UserLoginFormComponent>,
         public snackBar: MatSnackBar,
         public router: Router) { }
     
+      /**
+     * Lifecycle hook that is called when the component is initialized.
+     * It can be used for any setup or initializations (currently empty).
+     */  
     ngOnInit(): void {}
-
+/**
+     * Logs in the user by sending the login credentials (username and password) 
+     * to the backend for authentication. On success, it stores the user details 
+     * and JWT token in `localStorage`, closes the dialog, shows a success notification, 
+     * and navigates to the movies page.
+     * On failure, it shows an error notification to the user.
+     */
     logInUser() : void {
         this.fetchApiData.userLogin(this.userData).subscribe({
             next: (result) => {
