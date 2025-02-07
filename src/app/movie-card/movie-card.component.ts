@@ -15,6 +15,7 @@ import { MovieDetailsDialogComponent } from '../movie-details-dialog/movie-detai
 import { DirectorDialogComponent } from '../director-dialog/director-dialog.component';  // Import dialog component
 import { GenreDialogComponent } from '../genre-dialog/genre-dialog.component';  // Import dialog component
 import { Router } from '@angular/router';  // Import Router to navigate
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 /** 
 * Component for displaying movie cards.
  * Allows users to view movie details, open dialogs for genre and director,
@@ -114,6 +115,9 @@ getMovies(): void {
   addToFavorites(movieId: string): void {
     this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
       this.snackBar.open('Movie added to favorites!', 'OK', { duration: 3000 });
+      
+    
+      
     });
   }
 

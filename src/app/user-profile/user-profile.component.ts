@@ -134,6 +134,7 @@ export class UserProfileComponent implements OnInit {
       }
     });
   }
+  
 
   // Remove movie from favourite list
   /**
