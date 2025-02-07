@@ -64,7 +64,8 @@ getMovies(): void {
    * @param {string} genre - The genre of the movie.
    * @returns {void}
    */
-  openGenreDialog(genre: string): void {
+  openGenreDialog(genre: any): void {
+    
     this.dialog.open(GenreDialogComponent, {
       data: { genre: genre }
     });

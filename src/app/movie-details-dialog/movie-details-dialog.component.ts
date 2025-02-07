@@ -1,8 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-movie-details-dialog',
+  imports: [ MatDialogModule,],
   templateUrl: './movie-details-dialog.component.html',
   styleUrls: ['./movie-details-dialog.component.scss']
 })
