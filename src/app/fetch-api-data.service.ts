@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { map ,catchError} from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'https://bhavani-flixmovies.netlify.app/';
+const apiUrl = 'https://flixmovies-1ddcfb2fa4c5.herokuapp.com/';
 
 
 /**
