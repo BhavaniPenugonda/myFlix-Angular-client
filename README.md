@@ -84,6 +84,18 @@ The user can add or remove movies to/from their favorite list by clicking on the
 Users can view and edit their profiles, such as updating their email or birthday.
 
 
+**Services**
+The application uses Angular services (FetchApiDataService) to interact with the API. The service contains methods like:
+
+userRegistration(): Registers a new user.
+userLogin(): Logs in a user and retrieves a token.
+getAllMovies(): Fetches all movies.
+getMovie(title: string): Fetches details of a specific movie.
+getDirector(name: string): Fetches details of a director.
+getGenre(name: string): Fetches details of a genre.
+addUserFavoriteMovie(movieId: string): Adds a movie to the user's favorites.
+deleteUserFavoriteMovie(movieId: string): Removes a movie from the user's favorites.
+
 
 ## Additional Resources
 
