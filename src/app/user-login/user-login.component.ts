@@ -23,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     standalone:true,
     imports: [MatButtonModule,MatCardModule,FormsModule,MatFormFieldModule,MatInputModule,MatDialogModule,HttpClientModule],
     templateUrl: './user-login.component.html',
-    styleUrls: ['./user-login.component.scss']
+    styleUrls: ['./user-login.component.scss'],
+    
 })
 export class UserLoginFormComponent implements OnInit {
     @Input() userData = { Username: "", Password: "" };
