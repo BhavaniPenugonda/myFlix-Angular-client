@@ -29,17 +29,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
-  /**
-   * Holds the user profile data returned from the backend.
-   */
-  user: any = {};  // To hold the user data
-  /**
-   * Stores the original user data for comparison during editing.
-   */
-  userData: any = {}; // To store the original user data
-  /**
-   * Holds the user's favourite movies.
-   */
+  
   favouriteMovies: any[] = []; // To store the user's favourite movies
 
   // Bind form fields
@@ -47,11 +37,7 @@ export class UserProfileComponent implements OnInit {
    * Form fields for updating user profile information.
    * These fields are bound to the form inputs in the component's template.
    */
-  userDetails = {
-    Username: '',
-    Email: '',
-    Birthday: ''
-  };
+  userDetails: any = { };
 /**
    * Creates an instance of UserProfileComponent.
    * @param fetchApiData The service used to fetch and edit user data.
@@ -69,6 +55,7 @@ export class UserProfileComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getUserProfile();  // Fetch the user profile when the component is initialized
+    this.getUserFavouriteMovies();
   }
 
   // Fetch the user's profile data from the backend
@@ -78,21 +65,15 @@ export class UserProfileComponent implements OnInit {
    * with the fetched data.
    */
   getUserProfile(): void {
-    const username = localStorage.getItem('currentUser');
+    
     this.fetchApiData.getUser().subscribe({
-      next: (result) => {
-        this.user = result;
-        this.userData = { ...result };
-        this.userDetails = {
-          Username: this.user.Username,
-          Email: this.user.Email,
-          Birthday: this.user.Birthday
-        };
+      next: (data) => {
+        this.userDetails = data;
       },
       error: (err) => {
-        this.snackBar.open("Failed to fetch user profile", "OK", { duration: 2000 });
-      }
-    });
+        this.snackBar.open('Error fetching user details', 'OK', { duration: 2000 });
+      },
+    }); 
   }
 
   // Save the edited profile to the backend
@@ -101,15 +82,15 @@ export class UserProfileComponent implements OnInit {
    * This function sends the updated user data and updates the profile upon success.
    * Displays success or error messages accordingly.
    */
-  editUserProfile(): void {
-    this.fetchApiData.editUser(this.userDetails).subscribe({
-      next: (result) => {
-        this.snackBar.open("Profile updated successfully!", "OK", { duration: 2000 });
-        this.getUserProfile();  // Refresh the profile data after successful update
+  editUserProfile(updatedDetails: any): void {
+    this.fetchApiData.editUser(updatedDetails).subscribe({
+      next: (data) => {
+        this.snackBar.open('Profile updated successfully', 'OK', { duration: 2000 });
+        this.getUserProfile();  // Refresh the user details after updating
       },
       error: (err) => {
-        this.snackBar.open("Profile update failed", "OK", { duration: 2000 });
-      }
+        this.snackBar.open('Error updating profile', 'OK', { duration: 2000 });
+      },
     });
   }
 
@@ -119,20 +100,17 @@ export class UserProfileComponent implements OnInit {
    * Displays a message if the user is not logged in.
    */
   getUserFavouriteMovies(): void {
-    const userId = localStorage.getItem('currentUser'); // Assuming userId is stored in localStorage
-    // Check if userId is null
-  if (userId === null) {
-    this.snackBar.open("User is not logged in", "OK", { duration: 2000 });
-    return;
-  }
-    this.fetchApiData.getFavouriteMovies(userId).subscribe({
-      next: (result) => {
-        this.favouriteMovies = result;
-      },
-      error: (err) => {
-        this.snackBar.open("Failed to fetch favourite movies", "OK", { duration: 2000 });
-      }
-    });
+    const userId = localStorage.getItem('currentUser');
+    if (userId) {
+      this.fetchApiData.getFavouriteMovies(userId).subscribe({
+        next: (movies) => {
+          this.favouriteMovies = movies;
+        },
+        error: (err) => {
+          this.snackBar.open('Error fetching favorite movies', 'OK', { duration: 2000 });
+        },
+      });
+    }
   }
   
 
@@ -142,15 +120,14 @@ export class UserProfileComponent implements OnInit {
    * @param movieId The ID of the movie to be removed from favourites.
    */
   removeFromFavourites(movieId: string): void {
-    const userId = localStorage.getItem('currentUser');
     this.fetchApiData.deleteUserFavoriteMovie(movieId).subscribe({
       next: () => {
-        this.snackBar.open("Movie removed from favourites!", "OK", { duration: 2000 });
-        this.getUserFavouriteMovies();  // Refresh the favourite movies list after removal
+        this.snackBar.open('Movie removed from favorites', 'OK', { duration: 2000 });
+        this.getUserFavouriteMovies();  // Refresh the favorite movies after removing one
       },
       error: (err) => {
-        this.snackBar.open("Failed to remove movie from favourites", "OK", { duration: 2000 });
-      }
+        this.snackBar.open('Error removing movie from favorites', 'OK', { duration: 2000 });
+      },
     });
   }
 
@@ -159,7 +136,7 @@ export class UserProfileComponent implements OnInit {
    * Cancels the editing process and restores the original user data.
    */
   cancelEdit(): void {
-    this.userDetails = { ...this.userData };
+    this.userDetails = { ...this.userDetails };
   }
 
   

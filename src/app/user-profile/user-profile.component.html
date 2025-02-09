@@ -18,7 +18,7 @@
     </mat-form-field>
 
     <div class="buttons">
-      <button mat-raised-button color="primary" (click)="editUserProfile()">Save</button>
+      <button mat-raised-button color="primary" (click)="editUserProfile()">save</button>
       <button mat-raised-button color="accent" (click)="cancelEdit()">Cancel</button>
     </div>
   </form>
@@ -27,7 +27,7 @@
     <h3>Favourite Movies</h3>
     <ul>
       <li *ngFor="let movie of favouriteMovies">
-        <span>{{ movie.title }}</span> 
+        <span>{{ movie.Title }}</span> 
         <button mat-button color="warn" (click)="removeFromFavourites(movie._id)">Remove</button>
       </li>
     </ul>
