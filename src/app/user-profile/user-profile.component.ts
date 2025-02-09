@@ -82,8 +82,8 @@ export class UserProfileComponent implements OnInit {
    * This function sends the updated user data and updates the profile upon success.
    * Displays success or error messages accordingly.
    */
-  editUserProfile(updatedDetails: any): void {
-    this.fetchApiData.editUser(updatedDetails).subscribe({
+  editUserProfile(): void {
+    this.fetchApiData.editUser(this.userDetails).subscribe({
       next: (data) => {
         this.snackBar.open('Profile updated successfully', 'OK', { duration: 2000 });
         this.getUserProfile();  // Refresh the user details after updating
