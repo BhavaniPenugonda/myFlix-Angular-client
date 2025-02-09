@@ -104,7 +104,9 @@ export class UserProfileComponent implements OnInit {
     if (userId) {
       this.fetchApiData.getFavouriteMovies(userId).subscribe({
         next: (movies) => {
-          this.favouriteMovies = movies;
+          console.log('Fetched movies:', movies); // Log the movies to check
+          this.favouriteMovies =
+           movies;
         },
         error: (err) => {
           this.snackBar.open('Error fetching favorite movies', 'OK', { duration: 2000 });
