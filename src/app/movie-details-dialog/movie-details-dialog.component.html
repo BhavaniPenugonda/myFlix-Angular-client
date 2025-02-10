@@ -1,0 +1,18 @@
+
+<h2 mat-dialog-title>{{ data.movie.Title }}</h2>
+<mat-dialog-content>
+ <img [src]="data.movie.ImagePath" alt="{{ data.movie.Title }}" style="width: 100%; height: auto; margin-bottom: 10px;">
+  
+  <p><strong>Description:</strong> {{ data.movie.Description }}</p>
+  
+  <p><strong>Genre:</strong> {{ data.movie.Genre.Name }}</p>
+  <p><strong>Director:</strong> {{ data.movie.Director.Name }}</p>
+  
+  <p><strong>Director Biography:</strong> {{ data.movie.Director.Bio }}</p>
+  <p><strong>Director Birth:</strong> {{ data.movie.Director.Birth }}</p>
+  <p><strong>Director Death:</strong> {{ data.movie.Director.Death ? data.movie.Director.Death : 'N/A' }}</p>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
