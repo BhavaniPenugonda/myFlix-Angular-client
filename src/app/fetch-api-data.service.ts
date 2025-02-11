@@ -162,7 +162,8 @@ export class FetchApiDataService {
    */
   getFavouriteMovies(userId: string): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'users/' + userId + '/favorites', {
+    const username = JSON.parse(localStorage.getItem('currentUser')||'{}');
+    return this.http.get(apiUrl + 'users/' + username + '/movies', {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token,
       }),
