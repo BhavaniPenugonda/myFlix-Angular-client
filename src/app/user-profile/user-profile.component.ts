@@ -102,17 +102,32 @@ export class UserProfileComponent implements OnInit {
   getUserFavouriteMovies(): void {
     const userId = JSON.parse(localStorage.getItem('currentUser')||'{}');
     if (userId) {
+      // Fetch all movies first
+      this.fetchApiData.getAllMovies().subscribe({
+        next: (allMovies: { id: number, title: string }[]) => {
+          console.log('Fetched all movies:', allMovies); // Log the movies to check
+      // Now fetch the user's favourite movies based on the userId
       this.fetchApiData.getFavouriteMovies(userId).subscribe({
-        next: (movies) => {
-          console.log('Fetched movies:', movies); // Log the movies to check
-          this.favouriteMovies =
-           movies;
+        next: (favouriteMovieIds) => {
+          console.log('User favourite movie ids:', favouriteMovieIds); // Log the ids
+          
+          // Filter the allMovies to get only the user's favourites
+          this.favouriteMovies = allMovies.filter(movie =>
+            favouriteMovieIds.includes(movie.id)
+          );
+          
+          console.log('Filtered favourite movies:', this.favouriteMovies); // Log filtered movies
         },
         error: (err) => {
-          this.snackBar.open('Error fetching favorite movies', 'OK', { duration: 2000 });
-        },
+          this.snackBar.open('Error fetching favourite movies', 'OK', { duration: 2000 });
+        }
       });
+    },
+    error: (err) => {
+      this.snackBar.open('Error fetching all movies', 'OK', { duration: 2000 });
     }
+  });
+}
   }
   
 
