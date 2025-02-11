@@ -203,8 +203,8 @@ export class FetchApiDataService {
   public deleteUserFavoriteMovie(movieId: string) {
     const token = localStorage.getItem('token');
   
-    const username = localStorage.getItem('username');
-    return this.http.delete(apiUrl + 'users/' + username + '/favorites/' + movieId, {
+    const username = JSON.parse(localStorage.getItem('currentUser')||'{}');
+    return this.http.delete(apiUrl + 'users/' + username + '/movies/' + movieId, {
       headers: new HttpHeaders(
         {
           Authorization: `Bearer ${token}`,

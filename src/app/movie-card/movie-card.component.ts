@@ -113,14 +113,15 @@ getMovies(): void {
    * @returns {void}
    */
   addToFavorites(movieId: string): void {
-    this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
+   this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
       this.snackBar.open('Movie added to favorites!', 'OK', { duration: 3000 });
-      
-    
-      
+        
     });
+    
   }
 
+  // Function to directly invoke getUserFavouriteMovies in UserProfileComponent
+  
   // Navigate to user profile page
   goToProfile(): void {
     this.router.navigate(['/profile']);  // Navigate to the profile page
