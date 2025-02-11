@@ -128,7 +128,7 @@ export class UserProfileComponent implements OnInit {
    */
   removeFromFavourites(movieId: string): void {
     this.fetchApiData.deleteUserFavoriteMovie(movieId).subscribe({
-      next: () => {
+      next: (response) => {
         this.snackBar.open('Movie removed from favorites', 'OK', { duration: 2000 });
         this.getUserFavouriteMovies();  // Refresh the favorite movies after removing one
       },
