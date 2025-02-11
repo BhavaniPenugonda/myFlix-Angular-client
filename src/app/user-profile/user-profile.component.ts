@@ -55,9 +55,7 @@ export class UserProfileComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getUserProfile();  // Fetch the user profile when the component is initialized
-   /* this.getUserFavouriteMovies();*/
-   // Load the list of favorite movies from localStorage when the component initializes
-   this.favouriteMovies = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
+    this.getUserFavouriteMovies();
   }
 
   // Fetch the user's profile data from the backend
