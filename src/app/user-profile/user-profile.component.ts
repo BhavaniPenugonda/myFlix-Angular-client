@@ -55,7 +55,9 @@ export class UserProfileComponent implements OnInit {
    */
   ngOnInit(): void {
     this.getUserProfile();  // Fetch the user profile when the component is initialized
-    this.getUserFavouriteMovies();
+   /* this.getUserFavouriteMovies();*/
+   // Load the list of favorite movies from localStorage when the component initializes
+   this.favouriteMovies = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
   }
 
   // Fetch the user's profile data from the backend
@@ -100,7 +102,7 @@ export class UserProfileComponent implements OnInit {
    * Displays a message if the user is not logged in.
    */
   getUserFavouriteMovies(): void {
-    const userId = localStorage.getItem('currentUser');
+    const userId = JSON.parse(localStorage.getItem('currentUser')||'{}');
     if (userId) {
       this.fetchApiData.getFavouriteMovies(userId).subscribe({
         next: (movies) => {

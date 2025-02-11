@@ -113,12 +113,19 @@ getMovies(): void {
    * @returns {void}
    */
   addToFavorites(movieId: string): void {
-    this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
+   /* this.fetchApiData.addUserFavoriteMovie(movieId).subscribe((response) => {
       this.snackBar.open('Movie added to favorites!', 'OK', { duration: 3000 });
       
+    });*/
+
+    // Retrieve the existing list of favorite movies from localStorage
+    const favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies') || '[]');
     
-      
-    });
+    // Add the movie to the list
+    favoriteMovies.push(movieId);
+    
+    // Update localStorage with the new list of favorites
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
   }
 
   // Navigate to user profile page
