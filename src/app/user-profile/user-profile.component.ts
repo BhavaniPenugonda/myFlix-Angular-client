@@ -65,7 +65,8 @@ export class UserProfileComponent implements OnInit {
    * with the fetched data.
    */
   getUserProfile(): void {
-    
+    const username =JSON.parse( localStorage.getItem('currentUser')||'{}'); // Get username from localStorage
+    if (username) {
     this.fetchApiData.getUser().subscribe({
       next: (data) => {
         this.userDetails = data;
@@ -75,6 +76,7 @@ export class UserProfileComponent implements OnInit {
       },
     }); 
   }
+}
 
   // Save the edited profile to the backend
   /**

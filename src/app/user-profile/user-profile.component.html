@@ -1,40 +1,77 @@
-<div class="user-profile">
-  <h2>User Profile</h2>
+<div class="user-profile-container">
+  <mat-card class="user-profile-card">
+    <mat-card-header>
+      <mat-card-title>User Profile</mat-card-title>
+    </mat-card-header>
 
-  <form>
-    <mat-form-field >
-      <mat-label>Username</mat-label>
-      <input matInput [(ngModel)]="userDetails.Username" name="Username" required />
-    </mat-form-field>
+    <mat-card-content>
+      <!-- Display user details -->
+      <div class="user-details">
+        <div class="user-info">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput [value]="userDetails.username" disabled />
+          </mat-form-field>
+        </div>
 
-    <mat-form-field >
-      <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="userDetails.Email" name="Email" required />
-    </mat-form-field>
+        <div class="user-info">
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [value]="userDetails.email" disabled />
+          </mat-form-field>
+        </div>
 
-    <mat-form-field >
-      <mat-label>Birthday</mat-label>
-      <input matInput [(ngModel)]="userDetails.Birthday" name="Birthday" type="date" required />
-    </mat-form-field>
+        <div class="user-info">
+          <mat-form-field>
+            <mat-label>Birthday</mat-label>
+            <input matInput [value]="userDetails.Birthday" disabled />
+          </mat-form-field>
+        </div>
+      </div>
 
-    <div class="buttons">
-      <button mat-raised-button color="primary" (click)="editUserProfile()">save</button>
-      <button mat-raised-button color="accent" (click)="cancelEdit()">Cancel</button>
+    <!-- Button to edit profile -->
+    <div class="action-buttons">
+      <button mat-raised-button color="primary" (click)="editUserProfile()">Edit Profile</button>
     </div>
-  </form>
-  
-  <div *ngIf="favouriteMovies.length > 0" class="favourite-movies">
-    <h3>Favourite Movies</h3>
-    <ul>
-      <li *ngFor="let movie of favouriteMovies">
-        <span>{{ movie.Title }}</span> 
-        <button mat-button color="warn" (click)="removeFromFavourites(movie._id)">Remove</button>
-      </li>
-    </ul>
-  </div>
+  </mat-card-content>
+</mat-card>
 
-  <div class="profile-info">
-    <button mat-raised-button (click)="goToMovies()">Go to Movies</button>
+
+<!-- Display favorite movies -->
+<mat-card class="favourite-movies-card" *ngIf="favouriteMovies.length > 0">
+  <mat-card-header>
+    <mat-card-title>Favourite Movies</mat-card-title>
+  </mat-card-header>
+  
+<mat-card-content>
+  <div class="favourite-movies-list">
+    <div *ngFor="let movie of favouriteMovies" class="movie-item">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{ movie.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <button mat-button color="warn" (click)="removeFromFavourites(movie._id)">Remove from Favorites</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
+</mat-card-content>
+</mat-card>
+
+<!-- If no favourite movies, show a message -->
+<div *ngIf="favouriteMovies.length === 0" class="no-favorites">
+<p>You have no favourite movies yet.</p>
 </div>
 
+
+<!-- If no favourite movies, show a message -->
+<div *ngIf="favouriteMovies.length === 0" class="no-favorites">
+  <p>You have no favourite movies yet.</p>
+</div>
+
+<!-- Button to navigate to the movie page -->
+<div class="action-buttons">
+  <button mat-raised-button (click)="goToMovies()">Go to Movies</button>
+</div>
+</div>
