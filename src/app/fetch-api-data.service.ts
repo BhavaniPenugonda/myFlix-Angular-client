@@ -227,7 +227,8 @@ export class FetchApiDataService {
     const token = localStorage.getItem('token');
     
 
-    const username = localStorage.getItem('username');
+  // const username = localStorage.getItem('username');
+   const username = JSON.parse(localStorage.getItem('currentUser')||'{}');
     return this.http.put(apiUrl + 'users/' + username, userDetails, {
       headers: new HttpHeaders(
         {
