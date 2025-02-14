@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,PLATFORM_ID,Inject } from '@angular/core';
 import { FetchApiDataService } from '../fetch-api-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { MatDialogModule } from '@angular/material/dialog';
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser} from '@angular/common';
 
 /**
  * UserProfileComponent allows users to view and edit their profile information,
@@ -47,7 +47,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private fetchApiData: FetchApiDataService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: object
   ) {}
 /**
    * Lifecycle hook called when the component is initialized. 
@@ -65,7 +66,10 @@ export class UserProfileComponent implements OnInit {
    * with the fetched data.
    */
   getUserProfile(): void {
-    const username =JSON.parse( localStorage.getItem('currentUser')||'{}'); // Get username from localStorage
+    let username: string | null = null;
+    if (isPlatformBrowser(this.platformId)) {
+      username = JSON.parse(localStorage.getItem('currentUser') || '{}'); // Get username from localStorage
+    }
     if (username) {
     this.fetchApiData.getUser().subscribe({
       next: (data) => {
@@ -102,7 +106,10 @@ export class UserProfileComponent implements OnInit {
    * Displays a message if the user is not logged in.
    */
   getUserFavouriteMovies(): void {
-    const userId = JSON.parse(localStorage.getItem('currentUser')||'{}');
+    let userId: string | null = null;
+    if (isPlatformBrowser(this.platformId)) {
+      userId = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    }
     if (userId) {
       this.fetchApiData.getFavouriteMovies(userId).subscribe({
         next: (favMovies) => {

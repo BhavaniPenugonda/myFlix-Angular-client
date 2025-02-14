@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse,HttpClientModule,provideHttpClient} from '@angular/common/http';
+import { Injectable,PLATFORM_ID,Inject } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, throwError } from 'rxjs';
 import { map ,catchError} from 'rxjs/operators';
 
@@ -24,7 +25,7 @@ export class FetchApiDataService {
    * 
    * @param {HttpClient} http - The HttpClient used to make HTTP requests.
    */
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,@Inject(PLATFORM_ID) private platformId: object) {
   }
  // Making the api call for the user registration endpoint
  /**
@@ -66,7 +67,10 @@ export class FetchApiDataService {
    * @returns {Observable<any>} - The list of movies.
    */
   getAllMovies(): Observable<any> {
-    const token = localStorage.getItem('token');
+    let token='';
+    if (isPlatformBrowser(this.platformId)) {
+     token = localStorage.getItem('token') || '';
+    }
     return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
@@ -75,6 +79,7 @@ export class FetchApiDataService {
       catchError(this.handleError)
     );
   }
+
 
   // Get one movie
   /**
@@ -283,6 +288,7 @@ export class FetchApiDataService {
    * @returns {any} - An observable error message.
    */
   private handleError(error: HttpErrorResponse): any {
+    
     if (error.error instanceof ErrorEvent) {
     console.error('Some error occurred:', error.error.message);
     } else {
@@ -290,6 +296,7 @@ export class FetchApiDataService {
         `Error Status code ${error.status}, ` +
         `Error body is: ${error.error}`);
     }
+  
     return new Error(
     'Something bad happened; please try again later.');
   }
