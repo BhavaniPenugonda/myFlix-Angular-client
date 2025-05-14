@@ -97,6 +97,13 @@ addUserFavoriteMovie(movieId: string): Adds a movie to the user's favorites.
 deleteUserFavoriteMovie(movieId: string): Removes a movie from the user's favorites.
 
 
+
+Deployed Link: https://bhavanipenugonda.github.io/myFlix-Angular-client/
+Demo credentials:
+Login: demousername1
+Password: demopassword1
+
+
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
